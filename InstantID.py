@@ -10,8 +10,6 @@ from .resampler import Resampler
 from .CrossAttentionPatch import Attn2Replace, instantid_attention
 from .utils import tensor_to_image
 
-from insightface.app import FaceAnalysis
-
 try:
     import torchvision.transforms.v2 as T
 except ImportError:
@@ -217,6 +215,7 @@ class InstantIDFaceAnalysis:
     CATEGORY = "InstantID"
 
     def load_insight_face(self, provider):
+        from insightface.app import FaceAnalysis
         model = FaceAnalysis(name="antelopev2", root=INSIGHTFACE_DIR, providers=[provider + 'ExecutionProvider',]) # alternative to buffalo_l
         model.prepare(ctx_id=0, det_size=(640, 640))
 
